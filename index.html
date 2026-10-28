@@ -1,51 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Home</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ahmad Rafi Hamdi | Web Developer (Laravel)</title>
+  <meta name="description"
+    content="Portofolio Ahmad Rafi Hamdi, mahasiswa Sistem Informasi Bisnis Polinema yang berfokus pada Laravel dan mencari magang Web Developer / Full-Stack.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ahmad Rafi Hamdi | Web Developer (Laravel)">
+  <meta property="og:description"
+    content="Mahasiswa Sistem Informasi Bisnis Polinema. Backend Laravel, integrasi Midtrans. Mencari magang Web Developer / Full-Stack di Jawa Timur.">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230A0A0A'/%3E%3Ctext x='32' y='42' font-size='28' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'%3ERH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <canvas id="bgCanvas"></canvas>
+  <!-- Latar bintang-bintang (digambar oleh script.js) -->
+  <canvas id="bg" aria-hidden="true"></canvas>
 
-    <div id="preloader">
-        <div class="loading-text">LOADING PORTFOLIO</div>
-        <div class="loading-container">
-            <div class="loading-track">
-                <div class="loading-progress" id="progress"></div>
-            </div>
-            <div class="runner" id="runner">
-                <span class="runner-icon">🏃</span>
-            </div>
+  <a class="skip" href="#isi">Lewati ke konten</a>
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="#">AHMAD.RAFI.HAMDI</a>
+      <nav aria-label="Navigasi utama">
+        <a href="#proyek">Proyek</a><a href="#keahlian">Keahlian</a><a href="#perjalanan">Perjalanan</a><a
+          href="#kontak">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="isi">
+    <!-- Hero -->
+    <div class="hero">
+      <div>
+        <span class="badge">Terbuka untuk magang</span>
+        <h1>Saya membangun aplikasi web <span class="redup">yang menangani transaksi nyata.</span></h1>
+        <p class="lead">Ahmad Rafi Hamdi, mahasiswa Sistem Informasi Bisnis di Politeknik Negeri Malang. Fokus di
+          Laravel, dari perhitungan biaya sewa sampai pembayaran online.</p>
+        <div class="aksi">
+          <a class="btn" href="#proyek">Lihat Proyek</a>
+          <a class="tautan" href="https://www.linkedin.com/in/ahmad-rafi-hamdi-a902a7327/">LinkedIn</a>
+          <a class="tautan" href="https://github.com/hamdirafi">GitHub</a>
         </div>
+      </div>
+      <div class="id">
+        <!-- Foto: simpan file bernama foto.jpg di folder yang sama dengan file ini.
+           Kalau file belum ada, otomatis tampil inisial RH. -->
+        <div class="foto">
+          <span class="inisial" aria-hidden="true">RH</span>
+          <img src="foto.jpeg" alt="Foto Ahmad Rafi Hamdi" width="400" height="500" onerror="this.remove()">
+        </div>
+        <h3>Ahmad Rafi Hamdi</h3>
+        <p>Web Developer (Laravel)</p>
+      </div>
     </div>
 
-    <header>
-        <div class="logo"><a href="index.html">AHMAD.RAFI.HAMDI</a></div>
-        <nav>
-            <ul>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Proyek -->
+    <section id="proyek" class="col">
+      <h2>Proyek</h2>
+      <p class="sub">Beberapa proyek yang pernah saya kerjakan dan kembangkan.</p>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Creating digital<br><span>experiences.</span></h1>
-            <p>Saya adalah pengembang web yang fokus pada desain minimal dan fungsionalitas tinggi.</p>
-            <a href="work.html" class="btn">Lihat Proyek</a>
+      <div class="project-list">
+        <div class="project-card">
+          <div class="project-header">
+            <h3>OutGear Station</h3>
+            <span class="peran">Backend Developer</span>
+          </div>
+          <p class="desc">Sistem Informasi penyewaan alat outdoor berbasis web (Proyek PBL Semester 5). Menangani
+            perhitungan biaya sewa hingga integrasi pembayaran online Midtrans.</p>
+          <div class="tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">Midtrans</span>
+          </div>
+          <a class="repo" href="https://github.com/fael83/Pbl-Smt5_Outgear-Station">Lihat kode di GitHub</a>
         </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>umkm-lokal</h3>
+            <span class="peran">Full-Stack Developer</span>
+          </div>
+          <p class="desc">Aplikasi web manajemen F&B dan Point of Sale (POS) lokal untuk pencatatan transaksi harian,
+            pengelolaan menu, dan laporan penjualan secara efisien.</p>
+          <div class="tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">Laravel Herd</span>
+          </div>
+          <a class="repo" href="https://github.com/hamdirafi/umkm-lokal">Lihat kode di GitHub</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Hadir.in</h3>
+            <span class="peran">Backend Developer</span>
+          </div>
+          <p class="desc">Aplikasi presensi dan manajemen acara berbasis web yang dikembangkan menggunakan Laravel
+            sebagai backend API dan Next.js pada sisi frontend.</p>
+          <div class="tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">REST API</span>
+          </div>
+          <a class="repo" href="https://github.com/hamdirafi/hadirin-backend">Lihat kode di GitHub</a>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <p>© 2023 Rafi Developer.</p>
-    </footer>
+    <!-- Keahlian -->
+    <section id="keahlian" class="col">
+      <h2>Keahlian</h2>
+      <p class="sub">Yang sudah saya pakai di proyek, dan yang masih saya pelajari.</p>
+      <div class="skills">
+        <div class="box">
+          <h3>Backend</h3>
+          <div class="chips"><span class="chip">Laravel (PHP)</span><span class="chip">REST API</span><span
+              class="chip">Autentikasi</span><span class="chip">Midtrans</span></div>
+        </div>
+        <div class="box">
+          <h3>Frontend dan database</h3>
+          <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span
+              class="chip">JavaScript</span><span class="chip">MySQL</span><span class="chip">SQLite</span></div>
+        </div>
+        <div class="box">
+          <h3>Tools</h3>
+          <div class="chips"><span class="chip">Git dan GitHub</span><span class="chip">Laravel Herd</span><span
+              class="chip">Laragon</span></div>
+        </div>
+      </div>
+      <div class="box box-belajar">
+        <h3>Sedang dipelajari</h3>
+        <div class="chips"><span class="chip soft">Tailwind CSS</span><span class="chip soft">Alpine.js</span><span
+            class="chip soft">Next.js dan React</span><span class="chip soft">VPS dan Linux</span><span
+            class="chip soft">Cloudflare</span><span class="chip soft">Netlify</span><span
+            class="chip soft">Vercel</span></div>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Perjalanan -->
+    <section id="perjalanan" class="col">
+      <h2>Perjalanan</h2>
+      <p class="sub">Kuliah, pekerjaan, dan kegiatan di luar kelas.</p>
+      <ol class="time">
+        <li><small>2024 sampai sekarang</small><strong>Politeknik Negeri Malang</strong><span>D4 Sistem Informasi
+            Bisnis, semester 5. Mata kuliah: Pemrograman Web Lanjut, Manajemen Proyek Sistem Informasi, Tata Kelola TI,
+            Audit Sistem Informasi.</span></li>
+        <li><small>September 2026 sampai sekarang</small><strong>Barista, STAYCY_2026</strong><span>Melayani pelanggan
+            dan mengelola transaksi harian, termasuk di jam sibuk.</span></li>
+        <li><small>2025 sampai sekarang</small><strong>UKM Minat Bakat Theaterisic (Seni
+            Musik)</strong><span>Koordinator Lapangan pada acara konser nasional.</span></li>
+        <li><small>2025</small><strong>Workshop Integrasi Artificial Intelligence (AI)</strong><span>Diselenggarakan
+            oleh NVIDIA.</span></li>
+      </ol>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="col kontak">
+      <h2>Ada kesempatan magang web developer?</h2>
+      <p class="sub">Saya mencari magang Web Developer / Full-Stack selama 6 bulan. Email atau WhatsApp paling cepat.
+      </p>
+      <div class="aksi">
+        <a class="btn" href="mailto:hamdirafi310@gmail.com">hamdirafi310@gmail.com</a>
+        <a class="tautan" href="https://wa.me/6283871983300">WhatsApp</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">Ahmad Rafi Hamdi, Malang. 2026. <a href="https://github.com/hamdirafi">GitHub</a> dan <a
+        href="https://www.linkedin.com/in/ahmad-rafi-hamdi-a902a7327/">LinkedIn</a>.</div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
+
 </html>

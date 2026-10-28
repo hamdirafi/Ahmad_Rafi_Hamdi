@@ -1,204 +1,98 @@
-// ===== BACKGROUND INTERAKTIF (Index Page) =====
-var bgCanvas = document.getElementById('bgCanvas');
+// =====================================================
+// script.js : latar bintang interaktif kursor
+// =====================================================
 
-if (bgCanvas) {
-    var ctx = bgCanvas.getContext('2d');
-    var particles = [];
-    var mouse = { x: null, y: null };
-    
-    // Set canvas size
-    function resizeCanvas() {
-        bgCanvas.width = window.innerWidth;
-        bgCanvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    
-    // Mouse move
-    window.addEventListener('mousemove', function(e) {
-        mouse.x = e.x;
-        mouse.y = e.y;
-    });
-    
-    // Mouse leave window
-    window.addEventListener('mouseout', function() {
-        mouse.x = null;
-        mouse.y = null;
-    });
-    
-    // Particle class
-    class Particle {
-        constructor() {
-            this.x = Math.random() * bgCanvas.width;
-            this.y = Math.random() * bgCanvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-            this.color = 'rgba(255, 255, 255, ' + (Math.random() * 0.3 + 0.1) + ')';
-        }
-        
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            
-            // Reaksi mouse
-            if (mouse.x != null && mouse.y != null) {
-                var dx = mouse.x - this.x;
-                var dy = mouse.y - this.y;
-                var distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 120) {
-                    var force = (120 - distance) / 120;
-                    this.x -= dx * force * 0.02;
-                    this.y -= dy * force * 0.02;
-                }
-            }
-            
-            // Boundary
-            if (this.x < 0) this.x = bgCanvas.width;
-            if (this.x > bgCanvas.width) this.x = 0;
-            if (this.y < 0) this.y = bgCanvas.height;
-            if (this.y > bgCanvas.height) this.y = 0;
-        }
-        
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-    
-    // Buat partikel
-    function initParticles() {
-        particles = [];
-        var jumlah = Math.floor((bgCanvas.width * bgCanvas.height) / 8000);
-        for (var i = 0; i < jumlah; i++) {
-            particles.push(new Particle());
-        }
-    }
-    initParticles();
-    
-    // Hubungkan partikel
-    function connectParticles() {
-        for (var a = 0; a < particles.length; a++) {
-            for (var b = a + 1; b < particles.length; b++) {
-                var dx = particles[a].x - particles[b].x;
-                var dy = particles[a].y - particles[b].y;
-                var distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 100) {
-                    var opacity = 0.15 - (distance / 700);
-                    ctx.strokeStyle = 'rgba(255, 255, 255, ' + opacity + ')';
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[a].x, particles[a].y);
-                    ctx.lineTo(particles[b].x, particles[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-    
-    // Animation
-    function animate() {
-        ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-        
-        for (var i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        
-        connectParticles();
-        requestAnimationFrame(animate);
-    }
-    animate();
-    
-    // Resize
-    window.addEventListener('resize', function() {
-        resizeCanvas();
-        initParticles();
-    });
-}
+(function () {
+    var c = document.getElementById('bg');
+    if (!c || !c.getContext) return;
+    var ctx = c.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var diam = window.matchMedia('(prefers-reduced-motion: reduce)').matches; // true = tanpa animasi
+    var w = 0, h = 0, titik = [], JARAK = 130;
 
+    // Posisi kursor & radius interaksi
+    var mouse = { x: -1000, y: -1000, radius: 180 };
 
-// ===== FACE SCAN (Login Page) =====
-if (document.getElementById('video')) {
-    var video = document.getElementById('video');
-    var startBtn = document.getElementById('startBtn');
-    var statusText = document.getElementById('statusText');
-    var scannerOverlay = document.getElementById('scannerOverlay');
-    var cameraWrapper = document.getElementById('cameraWrapper');
-    
-    function startCamera() {
-        statusText.textContent = "Mengakses kamera...";
-        
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    statusText.textContent = "Kamera siap ✓";
-                    statusText.classList.add('success');
-                    startBtn.disabled = false;
-                })
-                .catch(function(err) {
-                    statusText.textContent = "Gagal: " + err.message;
-                    statusText.classList.add('error');
+    // Lacak pergerakan kursor
+    window.addEventListener('mousemove', function (e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    // Reset posisi saat kursor keluar layar
+    window.addEventListener('mouseleave', function () {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    function atur() {
+        var lebarBaru = window.innerWidth;
+        h = window.innerHeight;
+        c.width = lebarBaru * dpr; c.height = h * dpr;
+        c.style.width = lebarBaru + 'px'; c.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (lebarBaru !== w) {
+            w = lebarBaru;
+            var n = Math.min(90, Math.round(w * h / 16000));
+            titik = [];
+            for (var i = 0; i < n; i++) {
+                titik.push({
+                    x: Math.random() * w, y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+                    ox: 0, oy: 0 // offset dorongan dari kursor
                 });
-        } else {
-            statusText.textContent = "Browser tidak support!";
-            statusText.classList.add('error');
+            }
         }
+        gambar(false);
     }
-    
-    startCamera();
-    
-    startBtn.addEventListener('click', function() {
-        if (!video.srcObject) {
-            statusText.textContent = "Kamera belum aktif!";
-            return;
-        }
-        
-        startBtn.disabled = true;
-        statusText.textContent = "Memindai wajah...";
-        statusText.className = "status-text";
-        scannerOverlay.classList.add('active');
-        
-        setTimeout(function() {
-            statusText.textContent = "Wajah terdeteksi! ✓";
-            statusText.classList.add('success');
-            cameraWrapper.classList.add('success');
-            
-            setTimeout(function() {
-                window.location.href = "index.html";
-            }, 1000);
-        }, 2000);
-    });
-}
 
+    function gambar(jalan) {
+        ctx.clearRect(0, 0, w, h);
+        var i, j, p, q, d, dx, dy, dist, force;
 
-// ===== PRELOADER (Index Page) =====
-if (document.getElementById('preloader')) {
-    var preloader = document.getElementById('preloader');
-    var progress = document.getElementById('progress');
-    var runner = document.getElementById('runner');
-    var width = 0;
-    
-    var timer = setInterval(function() {
-        width += 2;
-        
-        progress.style.width = width + "%";
-        runner.style.left = width + "%";
-        
-        if (width >= 100) {
-            clearInterval(timer);
-            
-            setTimeout(function() {
-                preloader.style.opacity = 0;
-                preloader.style.transition = "opacity 0.5s";
-                
-                setTimeout(function() {
-                    preloader.style.display = "none";
-                }, 500);
-            }, 200);
+        for (i = 0; i < titik.length; i++) {
+            p = titik[i];
+
+            if (jalan) {
+                // Gerakan alami
+                p.x += p.vx; p.y += p.vy;
+
+                // Pantulan di tepi layar
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+
+                // Hitung jarak titik ke kursor
+                dx = p.x - mouse.x;
+                dy = p.y - mouse.y;
+                dist = Math.hypot(dx, dy);
+
+                // Efek terdorong halus saat mendekati kursor
+                if (dist < mouse.radius) {
+                    force = (1 - dist / mouse.radius) * 2;
+                    p.x += (dx / dist) * force;
+                    p.y += (dy / dist) * force;
+                }
+            }
+
+            // Gambar garis penghubung antar titik
+            for (j = i + 1; j < titik.length; j++) {
+                q = titik[j];
+                d = Math.hypot(p.x - q.x, p.y - q.y);
+                if (d < JARAK) {
+                    ctx.strokeStyle = 'rgba(255,255,255,' + ((1 - d / JARAK) * 0.14) + ')';
+                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+                }
+            }
+
+            // Gambar titik
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2); ctx.fill();
         }
-    }, 30);
-}
+
+        if (jalan) requestAnimationFrame(function () { gambar(true); });
+    }
+
+    atur();
+    window.addEventListener('resize', atur);
+    if (!diam) requestAnimationFrame(function () { gambar(true); });
+})();
