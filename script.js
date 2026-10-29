@@ -2,6 +2,7 @@
 // script.js : latar bintang interaktif kursor
 // =====================================================
 
+// ----- 1. Latar bintang-bintang -----
 (function () {
     var c = document.getElementById('bg');
     if (!c || !c.getContext) return;
@@ -19,8 +20,9 @@
         mouse.y = e.clientY;
     });
 
-    // Reset posisi saat kursor keluar layar
-    window.addEventListener('mouseleave', function () {
+    // Reset posisi saat kursor keluar dari halaman
+    // (mouseleave dipasang di elemen <html>, karena di window tidak terpicu)
+    document.documentElement.addEventListener('mouseleave', function () {
         mouse.x = -1000;
         mouse.y = -1000;
     });
@@ -38,8 +40,7 @@
             for (var i = 0; i < n; i++) {
                 titik.push({
                     x: Math.random() * w, y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-                    ox: 0, oy: 0 // offset dorongan dari kursor
+                    vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25
                 });
             }
         }
@@ -67,11 +68,16 @@
                 dist = Math.hypot(dx, dy);
 
                 // Efek terdorong halus saat mendekati kursor
-                if (dist < mouse.radius) {
+                // (dist > 0 mencegah pembagian dengan nol)
+                if (dist > 0 && dist < mouse.radius) {
                     force = (1 - dist / mouse.radius) * 2;
                     p.x += (dx / dist) * force;
                     p.y += (dy / dist) * force;
                 }
+
+                // Jaga titik tetap di dalam layar
+                p.x = Math.max(0, Math.min(w, p.x));
+                p.y = Math.max(0, Math.min(h, p.y));
             }
 
             // Gambar garis penghubung antar titik
