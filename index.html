@@ -68,14 +68,18 @@
       <h2>Proyek</h2>
       <p class="sub">Beberapa proyek yang pernah saya kerjakan dan kembangkan.</p>
 
-      <div class="project-list">
-        <div class="project-card">
-          <div class="project-header">
-            <h3>OutGear Station</h3>
-            <span class="peran">Backend Developer</span>
-          </div>
+      <!-- Proyek 1 : OutGear Station -->
+      <div class="project">
+        <div>
+          <h3>OutGear Station</h3>
           <p class="desc">Sistem Informasi penyewaan alat outdoor berbasis web (Proyek PBL Semester 5). Menangani
             perhitungan biaya sewa hingga integrasi pembayaran online Midtrans.</p>
+          <span class="peran">Backend Developer</span>
+          <ul class="steps">
+            <li><b>1</b><span><strong>Logika sewa</strong>Menghitung durasi × harga, diskon member, dan denda keterlambatan.</span></li>
+            <li><b>2</b><span><strong>Midtrans</strong>Integrasi Snap untuk pembayaran online (GoPay, VA, QRIS).</span></li>
+            <li><b>3</b><span><strong>Notifikasi</strong>Callback otomatis mengubah status pesanan saat pembayaran berhasil.</span></li>
+          </ul>
           <div class="tags">
             <span class="tag">Laravel</span>
             <span class="tag">SQLite</span>
@@ -83,14 +87,27 @@
           </div>
           <a class="repo" href="https://github.com/fael83/Pbl-Smt5_Outgear-Station">Lihat kode di GitHub</a>
         </div>
+        <div class="calc">
+          <h4>Hitung Biaya Sewa</h4>
+          <small>Demo logika perhitungan yang saya buat</small>
+          <div class="f"><label for="hari">Jumlah hari</label><input id="hari" type="number" min="1" value="3"></div>
+          <div class="f"><label for="harga">Harga per hari (Rp)</label><input id="harga" type="number" min="0" value="75000"></div>
+          <div class="total">Total estimasi<strong id="hasil">Rp 225.000</strong></div>
+        </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <h3>umkm-lokal</h3>
-            <span class="peran">Full-Stack Developer</span>
-          </div>
+      <!-- Proyek 2 : umkm-lokal -->
+      <div class="project">
+        <div>
+          <h3>umkm-lokal</h3>
           <p class="desc">Platform e-commerce dan manajemen pesanan untuk UMKM (dalam pengembangan). Dirancang dengan
             tiga peran pengguna (admin, merchant, customer) dan pembayaran Midtrans QRIS.</p>
+          <span class="peran">Full-Stack Developer</span>
+          <ul class="steps">
+            <li><b>1</b><span><strong>Multi-role</strong>Admin, merchant, dan customer dengan hak akses berbeda.</span></li>
+            <li><b>2</b><span><strong>Manajemen produk</strong>CRUD produk, stok, dan kategori untuk setiap merchant.</span></li>
+            <li><b>3</b><span><strong>Pembayaran QRIS</strong>Integrasi Midtrans QRIS untuk checkout pelanggan.</span></li>
+          </ul>
           <div class="tags">
             <span class="tag">Laravel</span>
             <span class="tag">SQLite</span>
@@ -98,20 +115,44 @@
           </div>
           <a class="repo" href="https://github.com/hamdirafi/umkm-lokal">Lihat kode di GitHub</a>
         </div>
+        <div class="calc">
+          <h4>Arsitektur Sistem</h4>
+          <small>Gambaran peran pengguna</small>
+          <ul class="steps">
+            <li><b>A</b><span><strong>Admin</strong>Mengelola seluruh merchant dan laporan penjualan.</span></li>
+            <li><b>M</b><span><strong>Merchant</strong>Menambahkan produk, memproses pesanan masuk.</span></li>
+            <li><b>C</b><span><strong>Customer</strong>Menjelajah produk, checkout, dan bayar via QRIS.</span></li>
+          </ul>
+        </div>
+      </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Hadir.in</h3>
-            <span class="peran">Backend Developer</span>
-          </div>
+      <!-- Proyek 3 : Hadir.in -->
+      <div class="project">
+        <div>
+          <h3>Hadir.in</h3>
           <p class="desc">Aplikasi presensi dan manajemen acara berbasis web yang dikembangkan menggunakan Laravel
             sebagai backend API dan Next.js pada sisi frontend.</p>
+          <span class="peran">Backend Developer</span>
+          <ul class="steps">
+            <li><b>1</b><span><strong>REST API</strong>Endpoint untuk autentikasi, manajemen acara, dan presensi peserta.</span></li>
+            <li><b>2</b><span><strong>QR Code</strong>Generate dan validasi QR untuk check-in peserta acara.</span></li>
+            <li><b>3</b><span><strong>Dashboard</strong>Statistik kehadiran real-time untuk penyelenggara.</span></li>
+          </ul>
           <div class="tags">
             <span class="tag">Laravel</span>
             <span class="tag">Next.js</span>
             <span class="tag">REST API</span>
           </div>
           <a class="repo" href="https://github.com/hamdirafi/hadirin-backend">Lihat kode di GitHub</a>
+        </div>
+        <div class="calc">
+          <h4>Tech Stack</h4>
+          <small>Pembagian frontend & backend</small>
+          <ul class="steps">
+            <li><b>BE</b><span><strong>Laravel</strong>API backend, autentikasi, dan logika bisnis.</span></li>
+            <li><b>FE</b><span><strong>Next.js</strong>Frontend React dengan SSR untuk performa optimal.</span></li>
+            <li><b>DB</b><span><strong>MySQL</strong>Database relasional untuk data acara dan peserta.</span></li>
+          </ul>
         </div>
       </div>
     </section>
