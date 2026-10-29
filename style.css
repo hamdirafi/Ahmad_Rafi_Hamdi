@@ -235,6 +235,16 @@ h1 .redup {
     color: var(--bg)
 }
 
+.btn.isi {
+    background: var(--ink);
+    color: var(--bg)
+}
+
+.btn.isi:hover {
+    background: transparent;
+    color: var(--ink)
+}
+
 .tautan {
     color: var(--muted);
     text-decoration: underline;
