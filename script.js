@@ -96,21 +96,3 @@
     window.addEventListener('resize', atur);
     if (!diam) requestAnimationFrame(function () { gambar(true); });
 })();
-
-// =====================================================
-// Kalkulator Biaya Sewa – demo OutGear Station
-// =====================================================
-(function () {
-    var hari = document.getElementById('hari');
-    var harga = document.getElementById('harga');
-    var hasil = document.getElementById('hasil');
-    if (!hari || !harga || !hasil) return;
-
-    function hitung() {
-        var total = (parseInt(hari.value) || 0) * (parseInt(harga.value) || 0);
-        hasil.textContent = 'Rp ' + total.toLocaleString('id-ID');
-    }
-
-    hari.addEventListener('input', hitung);
-    harga.addEventListener('input', hitung);
-})();
