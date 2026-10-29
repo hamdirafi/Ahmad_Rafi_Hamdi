@@ -515,7 +515,19 @@ footer a {
     }
 }
 
+/* Layar sedang: 3 kartu tetap berjajar, hanya kartunya dirapatkan */
 @media (max-width:1100px) {
+    .kartu {
+        padding: 22px
+    }
+
+    .kartu h3 {
+        font-size: 20px
+    }
+}
+
+/* Layar kecil (HP dan tablet kecil): kartu menumpuk satu kolom */
+@media (max-width:900px) {
     .kartu-grid {
         grid-template-columns: 1fr
     }
